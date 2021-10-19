@@ -1,6 +1,29 @@
 import User, { UserDocument } from '../models/User'
 import { NotFoundError } from '../helpers/apiError'
 
+const findOrCreate = async (
+  userEmail: string,
+  given_name: string,
+  family_name: string
+) => {
+  const user = await User.findOne({ emailId: userEmail })
+
+  if (!user) {
+    const newUser = new User({
+      firstName: given_name,
+      lastName: family_name,
+      emailId: userEmail,
+    })
+    console.log('newUser', newUser)
+    // const user={firstName:name,lastName:family_name,emailId:userEmail,shoes:[],order:[]}
+    create(newUser)
+    return newUser
+  } else {
+    console.log('olduser', user)
+    return user
+  }
+}
+
 const create = async (user: UserDocument): Promise<UserDocument> => {
   return user.save()
 }
@@ -50,4 +73,5 @@ export default {
   findAll,
   update,
   deleteUser,
+  findOrCreate,
 }

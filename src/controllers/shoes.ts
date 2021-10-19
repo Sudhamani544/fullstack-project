@@ -36,7 +36,7 @@ export const createShoes = async (
 }
 
 // PUT /shoes/:shoesId
-export const updatedShoes = async (
+export const updateShoes = async (
   req: Request,
   res: Response,
   next: NextFunction
