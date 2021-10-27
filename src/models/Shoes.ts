@@ -2,41 +2,49 @@
 import mongoose, { Document } from 'mongoose'
 
 export type ShoesDocument = Document & {
-  category: string
-  brandName: string
-  gender: string
+  title: string
+  decription: string
+  countInStock: number
   price: number
   discount: boolean
-  image: string
+  imageUrl: string
   User: string[]
   Order: string[]
   variant: string[]
 }
 
 const shoesSchema = new mongoose.Schema({
-  brandName: {
+  title: {
     type: String,
     required: true,
   },
-  category: {
+  description: {
     type: String,
     required: true,
   },
-  gender: {
-    type: String,
-  },
+
+  // brandName: {
+  //   type: String,
+  //   required: true,
+  // },
+  // category: {
+  //   type: String,
+  //   required: true,
+  // },
+  // gender: {
+  //   type: String,
+  // },
   price: {
     type: Number,
     required: true,
   },
   discount: {
     type: Boolean,
-    required: true,
   },
-  shoesQuantity: {
+  countInStock: {
     type: Number,
   },
-  image: {
+  imageUrl: {
     type: String,
   },
   user: [

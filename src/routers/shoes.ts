@@ -1,4 +1,5 @@
 import express from 'express'
+import passport from 'passport'
 
 import {
   createShoes,
@@ -10,11 +11,15 @@ import {
 
 const router = express.Router()
 
-// Every path we define here will get /api/v1/user prefix
+// Every path we define here will get /api/v1/shoes prefix
 router.get('/', findAll)
-router.get('/:userId', findById)
-router.put('/:userId', updateShoes)
-router.delete('/:userId', deleteShoes)
+router.get('/:shoeId', findById)
+router.put(
+  '/:shoeId',
+  passport.authenticate('jwt', { session: false }),
+  updateShoes
+)
+router.delete('/:shoeId', deleteShoes)
 router.post('/', createShoes)
 
 export default router

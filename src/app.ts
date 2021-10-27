@@ -4,12 +4,14 @@ import dotenv from 'dotenv'
 import passport from 'passport'
 import compression from 'compression'
 import cors from 'cors'
+
 import userRouter from './routers/user'
+import shoesRouter from './routers/shoes'
 import movieRouter from './routers/movie'
 import loginRouter from './routers/login'
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
-import { googleStrategy } from './config/passport'
+import { googleStrategy, jwtStrategy } from './config/passport'
 
 dotenv.config({ path: '.env' })
 const app = express()
@@ -27,10 +29,13 @@ app.use(lusca.xssProtection(true))
 app.use(passport.initialize())
 //after passport initialization, define passport strategy
 passport.use(googleStrategy)
+passport.use(jwtStrategy)
+
 // Use movie router
 app.use('/api/v1/movies', movieRouter)
 app.use('/api/v1/google/login', loginRouter)
 app.use('/api/v1/user', userRouter)
+app.use('/api/v1/shoes', shoesRouter)
 
 // Custom API error handler
 app.use(apiErrorHandler)

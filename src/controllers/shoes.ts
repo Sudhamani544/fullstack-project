@@ -11,14 +11,15 @@ export const createShoes = async (
   next: NextFunction
 ) => {
   try {
-    const shoesData = req.body
+    const { title, description, price, discount, imageUrl, countInStock } =
+      req.body
     const shoes = new Shoes({
-      brandName: shoesData.brandName,
-      category: shoesData.category,
-      gender: shoesData.gender,
-      price: shoesData.price,
-      discount: shoesData.price,
-      shoesQuantity: shoesData.shoesQuantity,
+      title,
+      description,
+      price,
+      discount,
+      imageUrl,
+      countInStock,
       user: [],
       order: [],
       variant: [],
@@ -35,7 +36,7 @@ export const createShoes = async (
   }
 }
 
-// PUT /shoes/:shoesId
+// PUT /shoes/:shoeId
 export const updateShoes = async (
   req: Request,
   res: Response,
@@ -43,7 +44,7 @@ export const updateShoes = async (
 ) => {
   try {
     const update = req.body
-    const shoesId = req.params.shoesId
+    const shoesId = req.params.shoeId
     const updatedShoes = await ShoesService.update(shoesId, update)
     res.json(updatedShoes)
   } catch (error) {
@@ -55,14 +56,14 @@ export const updateShoes = async (
   }
 }
 
-// DELETE /shoes/:shoesId
+// DELETE /shoes/:shoeId
 export const deleteShoes = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    await ShoesService.deleteShoes(req.params.shoesId)
+    await ShoesService.deleteShoes(req.params.shoeId)
     res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -73,14 +74,14 @@ export const deleteShoes = async (
   }
 }
 
-// GET /shoes/:shoesId
+// GET /shoes/:shoeId
 export const findById = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    res.json(await ShoesService.findById(req.params.shoesId))
+    res.json(await ShoesService.findById(req.params.shoeId))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

@@ -16,8 +16,8 @@ const findOrCreate = async (
     })
     console.log('newUser', newUser)
     // const user={firstName:name,lastName:family_name,emailId:userEmail,shoes:[],order:[]}
-    create(newUser)
-    return newUser
+    const created = await create(newUser)
+    return created
   } else {
     console.log('olduser', user)
     return user
