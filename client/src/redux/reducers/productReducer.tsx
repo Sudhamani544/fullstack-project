@@ -1,15 +1,17 @@
-import { Product } from '../types'
+import { Product, Size } from '../types'
 import { AllActions } from '../actions/productAction'
 import * as actionTypes from '../constants/productConstants'
 
 type DefaultState = {
   products: Product[]
   product: Product | null
+  sizes: Size[]
   error: any
 }
 
 const defaultState: DefaultState = {
   products: [],
+  sizes: [],
   product: null,
   error: null,
 }
@@ -35,6 +37,12 @@ const productReducer = (
         product: productData,
       }
 
+    case actionTypes.FETCH_SIZES_LIST:
+      const sizesPayload = action.payload
+      return {
+        ...state,
+        sizes: sizesPayload,
+      }
     case actionTypes.FETCH_ERROR:
       const errorFromPayload = action.payload
       return {

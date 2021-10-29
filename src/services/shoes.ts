@@ -19,6 +19,16 @@ const findAll = async (): Promise<ShoesDocument[]> => {
   return Shoes.find().sort({ name: 1, publishedYear: -1 })
 }
 
+const findByCategory = async (category: string): Promise<ShoesDocument[]> => {
+  const foundCategory = await Shoes.find({ category: category })
+
+  if (!foundCategory) {
+    throw new NotFoundError(`category ${category} not found`)
+  }
+
+  return foundCategory
+}
+
 const update = async (
   shoesId: string,
   update: Partial<ShoesDocument>
@@ -50,4 +60,5 @@ export default {
   findAll,
   update,
   deleteShoes,
+  findByCategory,
 }

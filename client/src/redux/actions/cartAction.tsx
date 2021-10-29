@@ -16,10 +16,10 @@ export const insertToCart = (product: Product, qty: number) => {
   }
 }
 
-export const removeFromCart = (productName: string) => {
+export const removeFromCart = (id: string) => {
   return {
     type: actionTypes.REMOVE_FROM_CART,
-    payload: productName,
+    payload: id,
   }
 }
 

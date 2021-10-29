@@ -4,6 +4,8 @@ export type Product = {
   description: string
   countInStock: number
   price: number
+  category: string
+  shoeCategory: string
   discount: boolean
   imageUrl: string
 }
@@ -14,9 +16,10 @@ export type Cart = {
   description: string
   countInStock: number
   price: number
+  category: string
   discount: boolean
   imageUrl: string
-  qty: number
+  size: number
 }
 
 export type Fav = {
@@ -24,4 +27,8 @@ export type Fav = {
   title: string
   imageUrl: string
   price: number
+}
+
+export type Size = {
+  size: number
 }

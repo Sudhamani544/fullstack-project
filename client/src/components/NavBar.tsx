@@ -1,16 +1,13 @@
 import React from 'react'
-import Badge from '@mui/material/Badge'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-
-import Drawer from '@mui/material/Drawer'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 
 import './Component.css'
 import HamburgerMenu from './HamburgerMenu'
 import { Store } from '../redux/reducers'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CartDrawer from './CartDrawer'
 import FavoriteDialog from './FavoriteDialog'
+import { getProductsByCategory } from '../redux/actions/productAction'
 
 const style = {
   color: 'white',
@@ -21,25 +18,25 @@ const NavBar = () => {
     return state.cartReducer.cart
   })
 
-  const [state, setState] = React.useState(false)
-
-  const toggleDrawer = (open: boolean) => (event: any) => {
-    event.preventDefault()
-    console.log('event', event)
-    if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return
-    }
-    setState(open)
-  }
-
   return (
     <nav className="navbar">
       {/* icon */}
       <div className="navbar__logo">
-        <h2>shopping cart</h2>
+        <Link to={'/api/v1'} className="shopHover">
+          Home
+        </Link>
+      </div>
+
+      <div className="navbar__category">
+        <li>
+          <Link to={`/api/v1?category=women`}>women</Link>
+        </li>
+        <li>
+          <Link to={`/api/v1?category=men`}>men</Link>
+        </li>
+        <li>
+          <Link to={`/api/v1?category=kids`}>kids</Link>
+        </li>
       </div>
 
       {/* shopping cart icon and badge */}
@@ -48,26 +45,11 @@ const NavBar = () => {
           <FavoriteDialog />
         </li>
         <li>
-          <Badge badgeContent={cart.length} color="primary" showZero>
-            <ShoppingCartIcon onClick={toggleDrawer(true)} sx={style} />
-          </Badge>
-          <Drawer
-            anchor="right"
-            open={state}
-            onClose={toggleDrawer(false)}
-            className="cartDrawer"
-          >
-            <p className="drawer__cart">Cart</p>
-            <p>cart is empty</p>
-            <button onClick={toggleDrawer(false)}>
-              {cart.length ? <CartDrawer /> : '   cart is empty   '}
-              <Link to="/api/v1/cart">view cart</Link>
-            </button>
-          </Drawer>
+          <CartDrawer />
         </li>
         <li>
-          <Link className="shopHover" to="/api/v1">
-            shop
+          <Link className="shopHover" to="/api/v1/login">
+            login
           </Link>
         </li>
       </ul>

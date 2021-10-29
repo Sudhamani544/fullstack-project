@@ -7,7 +7,7 @@ const findOrCreate = async (
   family_name: string
 ) => {
   const user = await User.findOne({ emailId: userEmail })
-
+  // eslint-disable-next-line
   if (!user) {
     const newUser = new User({
       firstName: given_name,

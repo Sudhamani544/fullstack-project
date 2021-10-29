@@ -1,27 +1,24 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { SetStateAction, useEffect, useState } from 'react'
-
-import shoes from '../media/shoes.jpg'
-import '../pages/pages.css'
-import { getOneProduct } from '../redux/actions/productAction'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useParams } from 'react-router'
+
+import '../pages/pages.css'
+import { getOneProduct, getSizes } from '../redux/actions/productAction'
 import { Store } from '../redux/reducers'
 import { Product } from '../redux/types'
-import { Link } from 'react-router-dom'
-import { keys } from 'lodash'
 import { insertToCart } from '../redux/actions/cartAction'
 
 const ShoesPage = () => {
   const { id } = useParams<{ id: string }>()
   const dispatch = useDispatch()
 
-  const [qty, setQty] = useState(1)
+  const [vSize, setVSize] = useState(0)
 
-  console.log('quantity', qty)
-
-  const updateQty = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setQty(parseInt(e.target.value))
+  const updateSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setVSize(parseInt(e.target.value))
   }
+
   useEffect(() => {
     dispatch(getOneProduct(id))
   }, [dispatch])
@@ -30,44 +27,56 @@ const ShoesPage = () => {
     return state.productReducer.product
   })
 
-  // const qty = useSelector((state: Store) => {
-  //   return state.cartReducer.qty
-  // })
+  useEffect(() => {
+    dispatch(getSizes())
+  }, [dispatch])
+
+  const sizes = useSelector((state: Store) => {
+    return state.productReducer.sizes
+  })
 
   const handleAddToCart = () => {
-    dispatch(insertToCart(product as Product, qty))
+    dispatch(insertToCart(product as Product, vSize))
   }
 
   return (
     <div className="productScreen">
       <div className="productScreen__image">
-        <img src={shoes} width="100%" height="70%" alt="shoe image"></img>
+        <img
+          src={product?.imageUrl}
+          width="100%"
+          height="50%"
+          alt="shoe image"
+        ></img>
       </div>
+
       <div className="productScreen__info">
-        <p>{product?.title}</p>
-        <p>{product?.description}</p>
-        <p>
-          Price: <span>€{product?.price}</span>
-        </p>
-        <p>
-          status:
-          <span>{product?.countInStock ? ' in stock' : ' out of stock'}</span>
-        </p>
-        <p>
-          Quantity
-          <select value={qty} onChange={updateQty}>
-            {[...Array(product?.countInStock).keys()].map((key) => (
-              <option value={key + 1}>{key + 1}</option>
-            ))}
-          </select>
-        </p>
+        <div>
+          <h2>{product?.title}</h2>
+          <p>{product?.category}'s shoes</p>
+          <p>€{product?.price}</p>
+        </div>
+        <div>
+          <p>{product?.description}</p>
+        </div>
+        <div>
+          <h3>size</h3>
+          <p>
+            <select value={vSize} onChange={updateSize}>
+              {sizes.map((s) => (
+                <option value={s.size}>{s.size}</option>
+              ))}
+            </select>
+          </p>
+        </div>
+
         <p>
           <button className="productScreen__button" onClick={handleAddToCart}>
             Add to Cart
           </button>
 
           <Link to="/api/v1" className="productScreen__link">
-            Back
+            Shop
           </Link>
         </p>
       </div>

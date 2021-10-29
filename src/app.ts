@@ -7,7 +7,7 @@ import cors from 'cors'
 
 import userRouter from './routers/user'
 import shoesRouter from './routers/shoes'
-import movieRouter from './routers/movie'
+import variantRouter from './routers/variant'
 import loginRouter from './routers/login'
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
@@ -32,8 +32,8 @@ passport.use(googleStrategy)
 passport.use(jwtStrategy)
 
 // Use movie router
-app.use('/api/v1/movies', movieRouter)
 app.use('/api/v1/google/login', loginRouter)
+app.use('/api/v1/variant', variantRouter)
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/shoes', shoesRouter)
 

@@ -1,16 +1,31 @@
-import React from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-
 import { Link } from 'react-router-dom'
-import shoes from '../media/shoes.jpg'
+import { useDispatch, useSelector } from 'react-redux'
+
 import './Component.css'
-import { Cart } from '../redux/types'
+import { Cart, Product } from '../redux/types'
+import { insertToCart, removeFromCart } from '../redux/actions/cartAction'
+import { Store } from '../redux/reducers'
+
 const CartItem = (item: Cart) => {
-  console.log('item', item)
+  const dispatch = useDispatch()
+
+  const deleteItem = () => {
+    dispatch(removeFromCart(item.id))
+  }
+
+  const sizes = useSelector((state: Store) => {
+    return state.productReducer.sizes
+  })
   return (
     <div className="cartItem">
       <div className="cartItem__image">
-        <img src={shoes} alt={item.title} width="130px" height="110px" />
+        <img
+          src={item.imageUrl}
+          alt={item.title}
+          width="130px"
+          height="110px"
+        />
       </div>
       <div className="cartItem__product">
         <Link to={`/api/v1/shoes/${item.id}`}>{item.title}</Link>
@@ -19,15 +34,15 @@ const CartItem = (item: Cart) => {
         <p>Price: €{item.price}</p>
       </div>
       <div>
-        Quantity
-        <select value={item.qty}>
-          {[...Array(item?.countInStock).keys()].map((key) => (
-            <option value={key + 1}>{key + 1}</option>
+        Size
+        <select value={item.size}>
+          {sizes.map((s) => (
+            <option value={s.size}>{s.size}</option>
           ))}
         </select>
       </div>
       <div>
-        <button>
+        <button onClick={deleteItem}>
           <DeleteOutlineIcon />
         </button>
       </div>

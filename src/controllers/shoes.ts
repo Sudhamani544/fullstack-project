@@ -11,12 +11,22 @@ export const createShoes = async (
   next: NextFunction
 ) => {
   try {
-    const { title, description, price, discount, imageUrl, countInStock } =
-      req.body
+    const {
+      title,
+      description,
+      price,
+      shoeCategory,
+      category,
+      discount,
+      imageUrl,
+      countInStock,
+    } = req.body
     const shoes = new Shoes({
       title,
       description,
       price,
+      shoeCategory,
+      category,
       discount,
       imageUrl,
       countInStock,
@@ -91,6 +101,24 @@ export const findById = async (
   }
 }
 
+// GET /shoes/category/:category
+export const findByCategory = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    console.log('hey', req.query)
+    res.json(await ShoesService.findByCategory(JSON.stringify(req.query)))
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
 // GET /shoes
 export const findAll = async (
   req: Request,
@@ -98,7 +126,13 @@ export const findAll = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await ShoesService.findAll())
+    console.log('query string', req.query.category)
+    const query = req.query.category as string
+    if (query === undefined) {
+      res.json(await ShoesService.findAll())
+    } else {
+      res.json(await ShoesService.findByCategory(query))
+    }
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

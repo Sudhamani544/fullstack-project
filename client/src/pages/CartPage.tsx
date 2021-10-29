@@ -11,7 +11,7 @@ const CartPage = () => {
   })
 
   return (
-    <div className="cartPage">
+    <div className="cartPage" style={{ minHeight: '80vh' }}>
       <div className="cartPage__left">
         <h2 className="cartpage__title">My Cart</h2>
         {cart.map((item) => (

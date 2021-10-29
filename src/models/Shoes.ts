@@ -6,11 +6,13 @@ export type ShoesDocument = Document & {
   decription: string
   countInStock: number
   price: number
+  category: string
   discount: boolean
   imageUrl: string
   User: string[]
   Order: string[]
   variant: string[]
+  shoeCategory: string
 }
 
 const shoesSchema = new mongoose.Schema({
@@ -23,17 +25,14 @@ const shoesSchema = new mongoose.Schema({
     required: true,
   },
 
-  // brandName: {
-  //   type: String,
-  //   required: true,
-  // },
-  // category: {
-  //   type: String,
-  //   required: true,
-  // },
-  // gender: {
-  //   type: String,
-  // },
+  shoeCategory: {
+    type: String,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+
   price: {
     type: Number,
     required: true,

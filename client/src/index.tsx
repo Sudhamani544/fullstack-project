@@ -6,12 +6,15 @@ import { Provider } from 'react-redux'
 import storeFactory from './redux/store'
 import './index.css'
 import App from './App'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 const reduxStore = storeFactory()
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={reduxStore}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

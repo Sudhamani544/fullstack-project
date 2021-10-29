@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/member-delimiter-style */
 import mongoose, { Document } from 'mongoose'
-import colorSchema from './Color'
 
 export type VariantDocument = Document & {
-  color: string[]
   size: number
 }
 
@@ -12,7 +10,6 @@ const variantSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  color: [colorSchema],
   product: [
     {
       type: mongoose.Schema.Types.ObjectId,

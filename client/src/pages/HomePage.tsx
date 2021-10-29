@@ -1,27 +1,37 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-
+import { useLocation } from 'react-router'
 import CardComponent from '../components/CardComponent'
 import '../pages/pages.css'
-import { getProducts } from '../redux/actions/productAction'
+import {
+  getProducts,
+  getProductsByCategory,
+} from '../redux/actions/productAction'
 import { Product } from '../redux/types'
 import { Store } from '../redux/reducers'
+import { useParams } from 'react-router-dom'
 
 const HomePage = () => {
   const dispatch = useDispatch()
 
+  const { search } = useLocation()
+  const searchParams = new URLSearchParams(search)
+  const category = searchParams.get('category')
+
   useEffect(() => {
-    dispatch(getProducts())
-  }, [dispatch])
-  // const [error, countries] = useCountries(
-  //   "https://restcountries.eu/rest/v2/all"
-  // );
+    if (category === null) {
+      dispatch(getProducts())
+    } else {
+      dispatch(getProductsByCategory(search))
+    }
+  }, [dispatch, category])
+
   const products: Product[] = useSelector((state: Store) => {
     return state.productReducer.products
   })
 
   return (
-    <div className="homepage">
+    <div className="homepage  homepage__image">
       {products.map((product) => (
         <CardComponent
           key={product._id}
@@ -29,6 +39,8 @@ const HomePage = () => {
           title={product.title}
           price={product.price}
           imageUrl={product.imageUrl}
+          category={product.category}
+          shoeCategory={product.shoeCategory}
         />
       ))}
     </div>
