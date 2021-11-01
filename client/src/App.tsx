@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Switch, Route } from 'react-router-dom'
 
 import HomePage from './pages/HomePage'
 import ShoesPage from './pages/ShoesPage'
 import CartPage from './pages/CartPage'
 import './App.css'
 import NavBar from './components/NavBar'
-import LoginPage from './pages/LoginPage'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -19,12 +19,11 @@ function App() {
           path="api/v1/shoes:category=category"
           component={HomePage}
         />
-        <Route exact path="/api/v1/login" component={LoginPage} />
         <Route exact path="/api/v1/shoes/:id" component={ShoesPage} />
         <Route exact path="/api/v1/cart" component={CartPage} />
       </Switch>
 
-      <footer className="footer">ajshdasjk kjdfhkd</footer>
+      <Footer />
     </div>
   )
 }

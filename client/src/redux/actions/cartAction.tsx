@@ -2,7 +2,7 @@ import { Dispatch } from 'redux'
 import { Cart, Product } from '../types'
 import * as actionTypes from '../constants/cartConstants'
 
-export const insertToCart = (product: Product, qty: number) => {
+export const insertToCart = (product: Product, vSize: number, qty: number) => {
   return {
     type: actionTypes.INSERT_TO_CART,
     payload: {
@@ -11,7 +11,8 @@ export const insertToCart = (product: Product, qty: number) => {
       imageUrl: product.imageUrl,
       price: product.price,
       countInStock: product.countInStock,
-      qty,
+      size: vSize,
+      qty: qty,
     },
   }
 }

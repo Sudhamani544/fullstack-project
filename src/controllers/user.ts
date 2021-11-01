@@ -38,7 +38,7 @@ export const updateUser = async (
   try {
     const update = req.body
     const userId = req.params.userId
-    const updatedUser = await UserService.update(userId, update)
+    const updatedUser = await UserService.addShoeToUser(userId, update)
     res.json(updatedUser)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {

@@ -3,13 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 
-import { removeFromCart } from '../redux/actions/cartAction'
-import { Store } from '../redux/reducers'
+import Drawer from '@mui/material/Drawer'
 import Badge from '@mui/material/Badge'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import Drawer from '@mui/material/Drawer'
-import { Cart } from '../redux/types'
-import CartDrawerItem from './CartDrawerItem'
+
+import { Store } from '../redux/reducers'
+import { removeFromCart } from '../redux/actions/cartAction'
 
 const style = {
   color: 'white',
@@ -25,7 +24,6 @@ function CartDrawer() {
 
   const toggleDrawer = (open: boolean) => (event: any) => {
     event.preventDefault()
-    console.log('event', event)
     if (
       event.type === 'keydown' &&
       (event.key === 'Tab' || event.key === 'Shift')
@@ -37,8 +35,13 @@ function CartDrawer() {
 
   return (
     <div>
-      <Badge badgeContent={cart.length} color="primary" showZero>
-        <ShoppingCartIcon onClick={toggleDrawer(true)} sx={style} />
+      <Badge
+        onClick={toggleDrawer(true)}
+        badgeContent={cart.length}
+        color="primary"
+        showZero
+      >
+        <ShoppingCartIcon sx={style} />
       </Badge>
       <Drawer
         anchor="right"
@@ -46,18 +49,37 @@ function CartDrawer() {
         onClose={toggleDrawer(false)}
         className="cartDrawer"
       >
-        <div className="drawer__cart">Cart</div>
+        <section className="drawer__cart">Cart</section>
+        {cart.length === 0 ? (
+          <section>
+            Cart Is Empty &nbsp;
+            <Link to="/api/v1">Go Back</Link>
+          </section>
+        ) : (
+          <section>
+            {cart.map((item) => (
+              <li className="cartDrawerItem cartDrawerHeight" key={item.id}>
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  width="100px"
+                  height="100px"
+                ></img>
+                <Link
+                  to={`/api/v1/shoes/${item.id}`}
+                  className="cartItem__product"
+                >
+                  {item.title}
+                </Link>
 
-        {cart.map((item) => (
-          <CartDrawerItem
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            imageUrl={item.imageUrl}
-          />
-        ))}
-
-        <button onClick={toggleDrawer(false)} className="cartDrawerToggle">
+                <button onClick={() => dispatch(removeFromCart(item.id))}>
+                  <DeleteOutlineIcon />
+                </button>
+              </li>
+            ))}
+          </section>
+        )}
+        <button className="cartDrawerToggle" onClick={toggleDrawer(false)}>
           <Link to="/api/v1/cart" className="cartDrawer__button">
             view cart
           </Link>

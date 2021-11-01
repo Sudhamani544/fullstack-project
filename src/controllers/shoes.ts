@@ -16,6 +16,7 @@ export const createShoes = async (
       description,
       price,
       shoeCategory,
+      addUserToShoe,
       category,
       discount,
       imageUrl,
@@ -26,6 +27,7 @@ export const createShoes = async (
       description,
       price,
       shoeCategory,
+      addUserToShoe,
       category,
       discount,
       imageUrl,
@@ -55,7 +57,7 @@ export const updateShoes = async (
   try {
     const update = req.body
     const shoesId = req.params.shoeId
-    const updatedShoes = await ShoesService.update(shoesId, update)
+    const updatedShoes = await ShoesService.addUserToShoe(shoesId, update)
     res.json(updatedShoes)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -101,24 +103,6 @@ export const findById = async (
   }
 }
 
-// GET /shoes/category/:category
-export const findByCategory = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    console.log('hey', req.query)
-    res.json(await ShoesService.findByCategory(JSON.stringify(req.query)))
-  } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
-  }
-}
-
 // GET /shoes
 export const findAll = async (
   req: Request,
@@ -126,7 +110,6 @@ export const findAll = async (
   next: NextFunction
 ) => {
   try {
-    console.log('query string', req.query.category)
     const query = req.query.category as string
     if (query === undefined) {
       res.json(await ShoesService.findAll())

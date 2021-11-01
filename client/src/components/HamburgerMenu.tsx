@@ -1,6 +1,7 @@
-import Drawer from '@mui/material/Drawer'
-import React from 'react'
+import { useState } from 'react'
+
 import MenuIcon from '@mui/icons-material/Menu'
+import Drawer from '@mui/material/Drawer'
 
 import './Component.css'
 
@@ -10,11 +11,10 @@ const style = {
 } as const
 
 const HamburgerMenu = () => {
-  const [state, setState] = React.useState(false)
+  const [state, setState] = useState(false)
 
   const toggleDrawer = (open: boolean) => (event: any) => {
     event.preventDefault()
-    console.log('event', event)
     if (
       event.type === 'keydown' &&
       (event.key === 'Tab' || event.key === 'Shift')
@@ -23,6 +23,7 @@ const HamburgerMenu = () => {
     }
     setState(open)
   }
+
   return (
     <div className="hamburgerMenu">
       <MenuIcon onClick={toggleDrawer(true)} fontSize="large" sx={style} />

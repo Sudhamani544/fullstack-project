@@ -20,6 +20,7 @@ export type Cart = {
   discount: boolean
   imageUrl: string
   size: number
+  qty: number
 }
 
 export type Fav = {
@@ -31,4 +32,11 @@ export type Fav = {
 
 export type Size = {
   size: number
+}
+
+export type User = {
+  id: string
+  firstName: string
+  lastName: string
+  emailId: string
 }

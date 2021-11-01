@@ -1,5 +1,6 @@
 import User, { UserDocument } from '../models/User'
 import { NotFoundError } from '../helpers/apiError'
+import { ShoesDocument } from '../models/Shoes'
 
 const findOrCreate = async (
   userEmail: string,
@@ -14,12 +15,10 @@ const findOrCreate = async (
       lastName: family_name,
       emailId: userEmail,
     })
-    console.log('newUser', newUser)
     // const user={firstName:name,lastName:family_name,emailId:userEmail,shoes:[],order:[]}
     const created = await create(newUser)
     return created
   } else {
-    console.log('olduser', user)
     return user
   }
 }
@@ -67,6 +66,14 @@ const deleteUser = async (userId: string): Promise<UserDocument | null> => {
   return foundUser
 }
 
+const addShoeToUser = async (userId: string, shoes: ShoesDocument) => {
+  const shoesToUser = User.findByIdAndUpdate(
+    userId,
+    { $push: { shoes: shoes._id } },
+    { new: true, useFindAndModify: false }
+  )
+}
+
 export default {
   create,
   findById,
@@ -74,4 +81,5 @@ export default {
   update,
   deleteUser,
   findOrCreate,
+  addShoeToUser,
 }

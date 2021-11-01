@@ -7,7 +7,6 @@ import {
   deleteShoes,
   findAll,
   updateShoes,
-  findByCategory,
 } from '../controllers/shoes'
 
 const router = express.Router()
@@ -15,10 +14,9 @@ const router = express.Router()
 // Every path we define here will get /api/v1/shoes prefix
 router.get('/', findAll)
 router.get('/:shoeId', findById)
-// router.get('', findByCategory)
 router.put(
   '/:shoeId',
-  // passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
   updateShoes
 )
 router.delete('/:shoeId', deleteShoes)

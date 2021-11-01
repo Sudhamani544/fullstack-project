@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router'
+
 import CardComponent from '../components/CardComponent'
 import '../pages/pages.css'
 import {
@@ -9,7 +10,6 @@ import {
 } from '../redux/actions/productAction'
 import { Product } from '../redux/types'
 import { Store } from '../redux/reducers'
-import { useParams } from 'react-router-dom'
 
 const HomePage = () => {
   const dispatch = useDispatch()

@@ -8,20 +8,29 @@ import { getOneProduct, getSizes } from '../redux/actions/productAction'
 import { Store } from '../redux/reducers'
 import { Product } from '../redux/types'
 import { insertToCart } from '../redux/actions/cartAction'
+import CartDrawer from '../components/CartDrawer'
+import Popover from '@mui/material/Popover'
+import Typography from '@mui/material/Typography'
 
 const ShoesPage = () => {
   const { id } = useParams<{ id: string }>()
   const dispatch = useDispatch()
 
   const [vSize, setVSize] = useState(0)
+  const [qty, setQty] = useState(1)
+  const [anchorEl, setAnchorEl] = useState(null)
 
   const updateSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setVSize(parseInt(e.target.value))
   }
 
+  const updateQty = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setQty(parseInt(e.target.value))
+  }
+
   useEffect(() => {
     dispatch(getOneProduct(id))
-  }, [dispatch])
+  }, [id])
 
   const product = useSelector((state: Store) => {
     return state.productReducer.product
@@ -35,9 +44,16 @@ const ShoesPage = () => {
     return state.productReducer.sizes
   })
 
-  const handleAddToCart = () => {
-    dispatch(insertToCart(product as Product, vSize))
+  const handleAddToCart = (e: any) => {
+    dispatch(insertToCart(product as Product, vSize, qty))
+    setAnchorEl(e.currentTarget)
   }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const open = Boolean(anchorEl)
 
   return (
     <div className="productScreen">
@@ -51,15 +67,15 @@ const ShoesPage = () => {
       </div>
 
       <div className="productScreen__info">
-        <div>
+        <section>
           <h2>{product?.title}</h2>
           <p>{product?.category}'s shoes</p>
           <p>€{product?.price}</p>
-        </div>
-        <div>
+        </section>
+        <section>
           <p>{product?.description}</p>
-        </div>
-        <div>
+        </section>
+        <section>
           <h3>size</h3>
           <p>
             <select value={vSize} onChange={updateSize}>
@@ -68,13 +84,31 @@ const ShoesPage = () => {
               ))}
             </select>
           </p>
-        </div>
-
+        </section>
+        <section>
+          <h3>quantity</h3>
+          <p>
+            <select value={qty} onChange={updateQty}>
+              {[...Array(5).keys()].map((x) => (
+                <option value={x + 1}>{x + 1}</option>
+              ))}
+            </select>
+          </p>
+        </section>
         <p>
           <button className="productScreen__button" onClick={handleAddToCart}>
             Add to Cart
           </button>
-
+          <Popover
+            open={open}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'center',
+              horizontal: 'center',
+            }}
+          >
+            <Typography sx={{ p: 2 }}>Product added to Cart</Typography>
+          </Popover>
           <Link to="/api/v1" className="productScreen__link">
             Shop
           </Link>

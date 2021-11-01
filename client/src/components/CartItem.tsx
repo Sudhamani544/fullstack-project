@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import './Component.css'
-import { Cart, Product } from '../redux/types'
-import { insertToCart, removeFromCart } from '../redux/actions/cartAction'
+import { Cart } from '../redux/types'
+import { removeFromCart } from '../redux/actions/cartAction'
 import { Store } from '../redux/reducers'
 
 const CartItem = (item: Cart) => {
@@ -17,9 +17,10 @@ const CartItem = (item: Cart) => {
   const sizes = useSelector((state: Store) => {
     return state.productReducer.sizes
   })
+
   return (
     <div className="cartItem">
-      <div className="cartItem__image">
+      <div>
         <img
           src={item.imageUrl}
           alt={item.title}
@@ -41,6 +42,9 @@ const CartItem = (item: Cart) => {
           ))}
         </select>
       </div>
+      <section>
+        <p>Quantity: {item.qty}</p>
+      </section>
       <div>
         <button onClick={deleteItem}>
           <DeleteOutlineIcon />

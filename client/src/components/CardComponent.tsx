@@ -1,4 +1,6 @@
-import React from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -6,12 +8,10 @@ import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+
 import '../pages/pages.css'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { Store } from '../redux/reducers'
 import { insertToFav, removeFromFav } from '../redux/actions/favActions'
-import air from '../media/air1.jpg'
 
 const style = {
   color: 'red',

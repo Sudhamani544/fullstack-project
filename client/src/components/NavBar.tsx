@@ -1,13 +1,12 @@
-import React from 'react'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import './Component.css'
 import HamburgerMenu from './HamburgerMenu'
 import { Store } from '../redux/reducers'
-import { useDispatch, useSelector } from 'react-redux'
 import CartDrawer from './CartDrawer'
 import FavoriteDialog from './FavoriteDialog'
-import { getProductsByCategory } from '../redux/actions/productAction'
+import LoginLogout from './LoginLogout'
 
 const style = {
   color: 'white',
@@ -20,14 +19,13 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      {/* icon */}
-      <div className="navbar__logo">
+      <section className="navbar__logo">
         <Link to={'/api/v1'} className="shopHover">
           Home
         </Link>
-      </div>
+      </section>
 
-      <div className="navbar__category">
+      <section className="navbar__category">
         <li>
           <Link to={`/api/v1?category=women`}>women</Link>
         </li>
@@ -37,10 +35,9 @@ const NavBar = () => {
         <li>
           <Link to={`/api/v1?category=kids`}>kids</Link>
         </li>
-      </div>
+      </section>
 
-      {/* shopping cart icon and badge */}
-      <ul className="navbar__links">
+      <section className="navbar__links">
         <li>
           <FavoriteDialog />
         </li>
@@ -48,11 +45,9 @@ const NavBar = () => {
           <CartDrawer />
         </li>
         <li>
-          <Link className="shopHover" to="/api/v1/login">
-            login
-          </Link>
+          <LoginLogout />
         </li>
-      </ul>
+      </section>
 
       <HamburgerMenu />
     </nav>

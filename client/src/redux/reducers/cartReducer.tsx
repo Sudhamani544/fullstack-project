@@ -21,10 +21,9 @@ const cartReducer = (
   switch (action.type) {
     case actionTypes.INSERT_TO_CART:
       const productItem = action.payload // product object
-      const incomingProductId = productItem.id
       // existCountry will be a country object, or undefined if nothing matches the condition
       const existProduct = state.cart.find((item) => {
-        if (incomingProductId === item.id) {
+        if (productItem.id === item.id && productItem.size === item.size) {
           return true
         }
         return false

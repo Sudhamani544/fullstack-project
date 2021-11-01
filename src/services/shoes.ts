@@ -1,5 +1,6 @@
 import Shoes, { ShoesDocument } from '../models/Shoes'
 import { NotFoundError } from '../helpers/apiError'
+import { UserDocument } from '../models/User'
 
 const create = async (shoes: ShoesDocument): Promise<ShoesDocument> => {
   return shoes.save()
@@ -54,6 +55,14 @@ const deleteShoes = async (shoesId: string): Promise<ShoesDocument | null> => {
   return foundShoes
 }
 
+const addUserToShoe = async (shoesId: string, user: UserDocument) => {
+  const userToShoes = Shoes.findByIdAndUpdate(
+    shoesId,
+    { $push: { user: user._id } },
+    { new: true, useFindAndModify: false }
+  )
+}
+
 export default {
   create,
   findById,
@@ -61,4 +70,5 @@ export default {
   update,
   deleteShoes,
   findByCategory,
+  addUserToShoe,
 }
