@@ -2,7 +2,6 @@ import { Dispatch } from 'redux'
 import { Product, Size } from '../types'
 import * as actionTypes from '../constants/productConstants'
 import axios from 'axios'
-import { ChipPropsSizeOverrides } from '@mui/material'
 
 axios.defaults.baseURL = 'http://localhost:5000/api/v1'
 //redux-thunk to fetch data using async, this thunk is called in Homepage
@@ -76,6 +75,13 @@ export const fetchOneProduct = (data: Product) => {
   }
 }
 
+export const sortDataBy = (sortby: 'price' | 'title', asc: boolean) => {
+  return {
+    type: actionTypes.SORT_DATA_BY,
+    payload: { sortby, asc },
+  }
+}
+
 export const fetchError = (error: any) => {
   return {
     type: actionTypes.FETCH_ERROR,
@@ -104,8 +110,14 @@ type FetchOneProduct = {
   payload: Product
 }
 
+type SortDataBy = {
+  type: typeof actionTypes.SORT_DATA_BY
+  payload: { sortby: 'price' | 'title'; asc: boolean }
+}
+
 export type AllActions =
   | FetchError
   | FetchProductsList
   | FetchOneProduct
   | FetchSizesList
+  | SortDataBy

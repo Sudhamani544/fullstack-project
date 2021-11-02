@@ -43,6 +43,7 @@ const productReducer = (
         ...state,
         sizes: sizesPayload,
       }
+
     case actionTypes.FETCH_ERROR:
       const errorFromPayload = action.payload
       return {
@@ -50,6 +51,21 @@ const productReducer = (
         error: errorFromPayload,
       }
 
+    case actionTypes.SORT_DATA_BY:
+      const { sortby, asc } = action.payload
+      const sortedData = state.products.sort((a, b) => {
+        const nameA = a[sortby]
+        const nameB = b[sortby]
+        if (asc) {
+          return nameA > nameB ? 1 : -1
+        } else {
+          return nameA > nameB ? -1 : 1
+        }
+      })
+      return {
+        ...state,
+        products: [...sortedData],
+      }
     default:
       return state
   }

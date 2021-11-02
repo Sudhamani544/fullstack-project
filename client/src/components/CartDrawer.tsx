@@ -1,8 +1,8 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+import { useState } from 'react'
 
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import Drawer from '@mui/material/Drawer'
 import Badge from '@mui/material/Badge'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
@@ -20,7 +20,7 @@ function CartDrawer() {
     return state.cartReducer.cart
   })
 
-  const [state, setState] = React.useState(false)
+  const [state, setState] = useState(false)
 
   const toggleDrawer = (open: boolean) => (event: any) => {
     event.preventDefault()
@@ -65,14 +65,13 @@ function CartDrawer() {
                   width="100px"
                   height="100px"
                 ></img>
-                <Link
-                  to={`/api/v1/shoes/${item.id}`}
-                  className="cartItem__product"
-                >
+                <Link to={`/shoes/${item.id}`} className="cartItem__product">
                   {item.title}
                 </Link>
 
-                <button onClick={() => dispatch(removeFromCart(item.id))}>
+                <button
+                  onClick={() => dispatch(removeFromCart(item.id, item.size))}
+                >
                   <DeleteOutlineIcon />
                 </button>
               </li>
@@ -80,7 +79,7 @@ function CartDrawer() {
           </section>
         )}
         <button className="cartDrawerToggle" onClick={toggleDrawer(false)}>
-          <Link to="/api/v1/cart" className="cartDrawer__button">
+          <Link to="/cart" className="cartDrawer__button">
             view cart
           </Link>
         </button>

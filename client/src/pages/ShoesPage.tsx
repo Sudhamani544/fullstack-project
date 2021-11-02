@@ -30,7 +30,7 @@ const ShoesPage = () => {
 
   useEffect(() => {
     dispatch(getOneProduct(id))
-  }, [id])
+  }, [dispatch])
 
   const product = useSelector((state: Store) => {
     return state.productReducer.product
@@ -109,7 +109,7 @@ const ShoesPage = () => {
           >
             <Typography sx={{ p: 2 }}>Product added to Cart</Typography>
           </Popover>
-          <Link to="/api/v1" className="productScreen__link">
+          <Link to="/" className="productScreen__link">
             Shop
           </Link>
         </p>

@@ -51,7 +51,7 @@ const FavoriteDialog = () => {
                   />
                 </div>
                 <div className="favoriteIcon__name">
-                  <Link to={`/api/v1/shoes/${item.id}`} onClick={handleClose}>
+                  <Link to={`/shoes/${item.id}`} onClick={handleClose}>
                     {item.title}
                   </Link>
                 </div>

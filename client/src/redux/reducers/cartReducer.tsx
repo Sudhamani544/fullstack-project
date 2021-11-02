@@ -43,10 +43,14 @@ const cartReducer = (
       }
 
     case actionTypes.REMOVE_FROM_CART:
-      const getProductId = action.payload // country name
+      const getProduct = action.payload
       return {
         ...state,
-        cart: [...state.cart.filter((item) => getProductId !== item.id)],
+        cart: [
+          ...state.cart.filter(
+            (item) => getProduct.id !== item.id && getProduct.size !== item.size
+          ),
+        ],
       }
 
     case actionTypes.FETCH_ERROR:

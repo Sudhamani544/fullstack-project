@@ -20,20 +20,20 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <section className="navbar__logo">
-        <Link to={'/api/v1'} className="shopHover">
+        <Link to={'/'} className="shopHover">
           Home
         </Link>
       </section>
 
       <section className="navbar__category">
         <li>
-          <Link to={`/api/v1?category=women`}>women</Link>
+          <Link to={`/?category=women`}>women</Link>
         </li>
         <li>
-          <Link to={`/api/v1?category=men`}>men</Link>
+          <Link to={`/?category=men`}>men</Link>
         </li>
         <li>
-          <Link to={`/api/v1?category=kids`}>kids</Link>
+          <Link to={`/?category=kids`}>kids</Link>
         </li>
       </section>
 

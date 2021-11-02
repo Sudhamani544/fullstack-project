@@ -51,10 +51,11 @@ const CardComponent = ({
   return (
     <div className="card">
       <Card className="card__link">
-        <Link to={`/api/v1/shoes/${id}`}>
+        <Link to={`/shoes/${id}`}>
           <CardMedia
             component="img"
-            height="200"
+            height="300"
+            width="300"
             image={imageUrl}
             alt={title}
           />

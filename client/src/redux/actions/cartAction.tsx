@@ -17,10 +17,10 @@ export const insertToCart = (product: Product, vSize: number, qty: number) => {
   }
 }
 
-export const removeFromCart = (id: string) => {
+export const removeFromCart = (id: string, size: number) => {
   return {
     type: actionTypes.REMOVE_FROM_CART,
-    payload: id,
+    payload: { id, size },
   }
 }
 
@@ -44,7 +44,7 @@ type InsertToCart = {
 
 type RemoveFromCart = {
   type: typeof actionTypes.REMOVE_FROM_CART
-  payload: string
+  payload: { id: string; size: number }
 }
 
 export type AllActions = FetchError | InsertToCart | RemoveFromCart
