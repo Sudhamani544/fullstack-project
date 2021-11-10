@@ -4,11 +4,13 @@ import * as actionTypes from '../constants/cartConstants'
 
 type DefaultState = {
   cart: Cart[]
+  cartDb: Product[]
   error: any
 }
 
 const defaultState: DefaultState = {
   cart: [],
+  cartDb: [],
   error: null,
 }
 
@@ -23,7 +25,7 @@ const cartReducer = (
       const productItem = action.payload // product object
       // existCountry will be a country object, or undefined if nothing matches the condition
       const existProduct = state.cart.find((item) => {
-        if (productItem.id === item.id && productItem.size === item.size) {
+        if (productItem._id === item._id && productItem.size === item.size) {
           return true
         }
         return false
@@ -32,7 +34,7 @@ const cartReducer = (
         return {
           ...state,
           cart: state.cart.map((item) =>
-            item.id === existProduct.id ? productItem : item
+            item._id === existProduct._id ? productItem : item
           ),
         }
       } else {
@@ -42,15 +44,18 @@ const cartReducer = (
         }
       }
 
+    case actionTypes.FETCH_SHOES_FROM_DB:
+      const productsPayload = action.payload
+      return {
+        ...state,
+        cartDb: [...state.cartDb, productsPayload],
+      }
+
     case actionTypes.REMOVE_FROM_CART:
       const getProduct = action.payload
       return {
         ...state,
-        cart: [
-          ...state.cart.filter(
-            (item) => getProduct.id !== item.id && getProduct.size !== item.size
-          ),
-        ],
+        cart: [...state.cart.filter((item) => getProduct !== item._id)],
       }
 
     case actionTypes.FETCH_ERROR:

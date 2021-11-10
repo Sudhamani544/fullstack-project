@@ -55,9 +55,10 @@ export const updateShoes = async (
   next: NextFunction
 ) => {
   try {
-    const update = req.body
-    const shoesId = req.params.shoeId
-    const updatedShoes = await ShoesService.addUserToShoe(shoesId, update)
+    const userId = req.body.user
+    const productId = req.params.shoeId
+    const updatedShoes = await ShoesService.addUserToShoe(productId, userId)
+    console.log(`userid ${userId}, shoeid ${productId}`)
     res.json(updatedShoes)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {

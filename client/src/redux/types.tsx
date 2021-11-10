@@ -11,7 +11,7 @@ export type Product = {
 }
 
 export type Cart = {
-  id: string
+  _id: string
   title: string
   description: string
   countInStock: number
@@ -24,7 +24,7 @@ export type Cart = {
 }
 
 export type Fav = {
-  id: string
+  _id: string
   title: string
   imageUrl: string
   price: number
@@ -35,8 +35,9 @@ export type Size = {
 }
 
 export type User = {
-  id: string
+  _id: string
   firstName: string
   lastName: string
   emailId: string
+  shoes: []
 }

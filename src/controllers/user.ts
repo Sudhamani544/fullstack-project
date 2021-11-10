@@ -36,9 +36,10 @@ export const updateUser = async (
   next: NextFunction
 ) => {
   try {
-    const update = req.body
+    const productId = req.body.shoes
     const userId = req.params.userId
-    const updatedUser = await UserService.addShoeToUser(userId, update)
+    const updatedUser = await UserService.addShoeToUser(userId, productId)
+
     res.json(updatedUser)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -74,7 +75,7 @@ export const findById = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await UserService.findById(req.params.UserId))
+    res.json(await UserService.findById(req.params.userId))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

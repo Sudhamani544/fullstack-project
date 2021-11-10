@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import Drawer from '@mui/material/Drawer'
@@ -8,7 +8,7 @@ import Badge from '@mui/material/Badge'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 import { Store } from '../redux/reducers'
-import { removeFromCart } from '../redux/actions/cartAction'
+import { getShoesFromDB, removeFromCart } from '../redux/actions/cartAction'
 
 const style = {
   color: 'white',
@@ -16,7 +16,22 @@ const style = {
 
 function CartDrawer() {
   const dispatch = useDispatch()
+  const token = useSelector((state: Store) => {
+    return state.userReducer.token
+  })
+
+  const user = useSelector((state: Store) => {
+    return state.userReducer.user
+  })
+
+  useEffect(() => {
+    dispatch(getShoesFromDB(user?._id))
+  }, [user?._id])
+
   const cart = useSelector((state: Store) => {
+    if (token) {
+      return state.cartReducer.cartDb
+    }
     return state.cartReducer.cart
   })
 
@@ -58,20 +73,18 @@ function CartDrawer() {
         ) : (
           <section>
             {cart.map((item) => (
-              <li className="cartDrawerItem cartDrawerHeight" key={item.id}>
+              <li className="cartDrawerItem cartDrawerHeight" key={item._id}>
                 <img
                   src={item.imageUrl}
                   alt={item.title}
                   width="100px"
                   height="100px"
                 ></img>
-                <Link to={`/shoes/${item.id}`} className="cartItem__product">
+                <Link to={`/shoes/${item._id}`} className="cartItem__product">
                   {item.title}
                 </Link>
 
-                <button
-                  onClick={() => dispatch(removeFromCart(item.id, item.size))}
-                >
+                <button onClick={() => dispatch(removeFromCart(item._id))}>
                   <DeleteOutlineIcon />
                 </button>
               </li>

@@ -17,7 +17,7 @@ const findById = async (shoesId: string): Promise<ShoesDocument> => {
 }
 
 const findAll = async (): Promise<ShoesDocument[]> => {
-  return Shoes.find().sort({ name: 1, publishedYear: -1 })
+  return Shoes.find()
 }
 
 const findByCategory = async (category: string): Promise<ShoesDocument[]> => {
@@ -55,12 +55,18 @@ const deleteShoes = async (shoesId: string): Promise<ShoesDocument | null> => {
   return foundShoes
 }
 
-const addUserToShoe = async (shoesId: string, user: UserDocument) => {
+const addUserToShoe = async (shoesId: string, userId: string) => {
   const userToShoes = Shoes.findByIdAndUpdate(
-    shoesId,
-    { $push: { user: user._id } },
+    { _id: shoesId },
+    { $push: { user: userId } },
     { new: true, useFindAndModify: false }
   )
+
+  if (!userToShoes) {
+    throw new NotFoundError(`Shoe id ${shoesId} not found`)
+  }
+  console.log('in service')
+  return userToShoes
 }
 
 export default {

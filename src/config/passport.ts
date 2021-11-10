@@ -1,5 +1,3 @@
-import passport from 'passport'
-import passportLocal from 'passport-local'
 import GoogleTokenStrategy from 'passport-google-id-token'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 
@@ -16,11 +14,11 @@ export const googleStrategy = new GoogleTokenStrategy(
     clientId: process.env.GOOGLE_CLIENT_ID,
   },
   async (parsedToken: any, googleId: any, done: any) => {
-    console.log('parsedToken: ', parsedToken)
+    // eslint-disable-next-line
     const { email, name, picture, given_name, family_name } =
       parsedToken.payload
+    // eslint-disable-next-line
     const user = await UserService.findOrCreate(email, given_name, family_name)
-    console.log('promise.ts user ', user)
     //2 arguments, first one is the error object, second is the data you want to forward
     done(null, user)
   }
@@ -38,7 +36,6 @@ export const jwtStrategy = new JwtStrategy(
 
     const { emailId } = payload
     const user = await User.findOne({ emailId: emailId })
-    // const user = { name: 'Duy', email: 'asdadasd', age: 13213 }
 
     if (!user) {
       throw new NotFoundError(`user not found`)

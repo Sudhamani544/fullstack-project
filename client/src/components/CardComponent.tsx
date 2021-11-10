@@ -35,7 +35,7 @@ const CardComponent = ({
   id,
 }: ProductCardComponent) => {
   const isInFav = useSelector((state: Store) =>
-    state.favReducer.fav.some((item) => item.id === id)
+    state.favReducer.fav.some((item) => item._id === id)
   )
 
   const dispatch = useDispatch()

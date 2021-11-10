@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import GoogleLogin, { GoogleLogout } from 'react-google-login'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserData } from '../redux/actions/userAction'
+import { getJWTToken, getUserData } from '../redux/actions/userAction'
 import { Store } from '../redux/reducers'
 import { User } from '../redux/types'
 
@@ -27,8 +27,10 @@ const LoginPage = () => {
       id_token: tokenId,
     })
     const userData = result.data.userData
-    localStorage.setItem('token', result.data.token)
+    const token = result.data.token
+    localStorage.setItem('token', token)
     dispatch(getUserData(userData))
+    dispatch(getJWTToken(token))
   }
 
   const user = useSelector((state: Store) => {
@@ -37,7 +39,8 @@ const LoginPage = () => {
 
   const onSignoutSuccess = () => {
     localStorage.removeItem('token')
-
+    const token = ''
+    dispatch(getJWTToken(token))
     setLogin(true)
     setLogout(false)
   }

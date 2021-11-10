@@ -18,10 +18,10 @@ const favReducer = (state = defaultState, action: AllActions): DefaultState => {
   switch (action.type) {
     case actionTypes.INSERT_TO_FAV:
       const productItem = action.payload // product object
-      const incomingProductId = productItem.id
+      const incomingProductId = productItem._id
       // existCountry will be a country object, or undefined if nothing matches the condition
       const existProduct = state.fav.find((item) => {
-        if (incomingProductId === item.id) {
+        if (incomingProductId === item._id) {
           return true
         }
         return false
@@ -39,7 +39,7 @@ const favReducer = (state = defaultState, action: AllActions): DefaultState => {
       const getProductId = action.payload // country name
       return {
         ...state,
-        fav: [...state.fav.filter((item) => getProductId !== item.id)],
+        fav: [...state.fav.filter((item) => getProductId !== item._id)],
       }
 
     case actionTypes.FETCH_ERROR:

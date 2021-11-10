@@ -2,6 +2,7 @@ import User, { UserDocument } from '../models/User'
 import { NotFoundError } from '../helpers/apiError'
 import { ShoesDocument } from '../models/Shoes'
 
+// eslint-disable-next-line
 const findOrCreate = async (
   userEmail: string,
   given_name: string,
@@ -60,18 +61,24 @@ const deleteUser = async (userId: string): Promise<UserDocument | null> => {
   const foundUser = User.findByIdAndDelete(userId)
 
   if (!foundUser) {
-    throw new NotFoundError(`Movie ${userId} not found`)
+    throw new NotFoundError(`User ${userId} not found`)
   }
 
   return foundUser
 }
 
-const addShoeToUser = async (userId: string, shoes: ShoesDocument) => {
+const addShoeToUser = async (userId: string, shoesId: string) => {
   const shoesToUser = User.findByIdAndUpdate(
-    userId,
-    { $push: { shoes: shoes._id } },
+    { _id: userId },
+    { $push: { shoes: shoesId } },
     { new: true, useFindAndModify: false }
   )
+
+  if (!shoesToUser) {
+    throw new NotFoundError(`User ${userId} not found`)
+  }
+
+  return shoesToUser
 }
 
 export default {

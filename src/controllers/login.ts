@@ -10,6 +10,5 @@ export const googleLogin = (req: Request, res: Response) => {
   const token = jwt.sign({ userData }, JWT_SECRET, {
     expiresIn: '2h',
   })
-  console.log('login token', token)
   res.json({ token: token, userData: userData })
 }

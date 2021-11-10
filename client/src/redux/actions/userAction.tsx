@@ -2,6 +2,7 @@ import { User } from '../types'
 import * as actionTypes from '../constants/userConstants'
 
 export const getJWTToken = (token: string) => {
+  console.log('token', token)
   return {
     type: actionTypes.GET_JWT_TOKEN,
     payload: token,

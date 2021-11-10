@@ -6,9 +6,8 @@ import { useParams } from 'react-router'
 import '../pages/pages.css'
 import { getOneProduct, getSizes } from '../redux/actions/productAction'
 import { Store } from '../redux/reducers'
-import { Product } from '../redux/types'
-import { insertToCart } from '../redux/actions/cartAction'
-import CartDrawer from '../components/CartDrawer'
+import { Product, User } from '../redux/types'
+import { insertToCart, insertToDBCart } from '../redux/actions/cartAction'
 import Popover from '@mui/material/Popover'
 import Typography from '@mui/material/Typography'
 
@@ -30,7 +29,7 @@ const ShoesPage = () => {
 
   useEffect(() => {
     dispatch(getOneProduct(id))
-  }, [dispatch])
+  }, [id])
 
   const product = useSelector((state: Store) => {
     return state.productReducer.product
@@ -44,8 +43,20 @@ const ShoesPage = () => {
     return state.productReducer.sizes
   })
 
+  const token = useSelector((state: Store) => {
+    return state.userReducer.token
+  })
+
+  const user = useSelector((state: Store) => {
+    return state.userReducer.user
+  })
+
   const handleAddToCart = (e: any) => {
-    dispatch(insertToCart(product as Product, vSize, qty))
+    token
+      ? dispatch(
+          insertToDBCart(product as Product, user as User, token as string)
+        )
+      : dispatch(insertToCart(product as Product, vSize, qty))
     setAnchorEl(e.currentTarget)
   }
 

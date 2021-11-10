@@ -11,7 +11,7 @@ const CartItem = (item: Cart) => {
   const dispatch = useDispatch()
 
   const deleteItem = () => {
-    dispatch(removeFromCart(item.id, item.size))
+    dispatch(removeFromCart(item._id))
   }
 
   const sizes = useSelector((state: Store) => {
@@ -29,7 +29,7 @@ const CartItem = (item: Cart) => {
         />
       </div>
       <div className="cartItem__product">
-        <Link to={`/shoes/${item.id}`}>{item.title}</Link>
+        <Link to={`/shoes/${item._id}`}>{item.title}</Link>
       </div>
       <div>
         <p>Price: €{item.price}</p>

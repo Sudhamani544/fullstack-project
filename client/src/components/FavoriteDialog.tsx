@@ -41,7 +41,7 @@ const FavoriteDialog = () => {
         ) : (
           favorite.map((item) => {
             return (
-              <div className="favoriteIcon_display" key={item.id}>
+              <div className="favoriteIcon_display" key={item._id}>
                 <div>
                   <img
                     src={item.imageUrl}
@@ -51,13 +51,13 @@ const FavoriteDialog = () => {
                   />
                 </div>
                 <div className="favoriteIcon__name">
-                  <Link to={`/shoes/${item.id}`} onClick={handleClose}>
+                  <Link to={`/shoes/${item._id}`} onClick={handleClose}>
                     {item.title}
                   </Link>
                 </div>
                 <div>€{item.price}</div>
                 <div>
-                  <button onClick={() => dispatch(removeFromFav(item.id))}>
+                  <button onClick={() => dispatch(removeFromFav(item._id))}>
                     <DeleteOutlineIcon />
                   </button>
                 </div>
