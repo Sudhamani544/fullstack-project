@@ -7,7 +7,7 @@ export type Product = {
   category: string
   shoeCategory: string
   discount: boolean
-  imageUrl: string
+  imageUrl: [string]
 }
 
 export type Cart = {
@@ -18,7 +18,7 @@ export type Cart = {
   price: number
   category: string
   discount: boolean
-  imageUrl: string
+  imageUrl: [string]
   size: number
   qty: number
 }
@@ -26,7 +26,7 @@ export type Cart = {
 export type Fav = {
   _id: string
   title: string
-  imageUrl: string
+  imageUrl: [string]
   price: number
 }
 

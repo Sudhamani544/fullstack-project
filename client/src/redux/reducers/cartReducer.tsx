@@ -1,6 +1,7 @@
 import { Cart, Product } from '../types'
 import { AllActions } from '../actions/cartAction'
 import * as actionTypes from '../constants/cartConstants'
+import ShoesPage from '../../pages/ShoesPage'
 
 type DefaultState = {
   cart: Cart[]
@@ -25,7 +26,7 @@ const cartReducer = (
       const productItem = action.payload // product object
       // existCountry will be a country object, or undefined if nothing matches the condition
       const existProduct = state.cart.find((item) => {
-        if (productItem._id === item._id && productItem.size === item.size) {
+        if (productItem._id === item._id) {
           return true
         }
         return false
@@ -45,10 +46,20 @@ const cartReducer = (
       }
 
     case actionTypes.FETCH_SHOES_FROM_DB:
-      const productsPayload = action.payload
-      return {
-        ...state,
-        cartDb: [...state.cartDb, productsPayload],
+      const { shoes, token } = action.payload
+      if (token && shoes) {
+        console.log('shoes with token')
+        console.log('from db to cart')
+        return {
+          ...state,
+          cartDb: [...state.cartDb, shoes],
+        }
+      } else {
+        console.log('shoes with no token')
+        return {
+          ...state,
+          cartDb: [],
+        }
       }
 
     case actionTypes.REMOVE_FROM_CART:

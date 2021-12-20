@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/member-delimiter-style */
+import { kMaxLength } from 'buffer'
 import mongoose, { Document } from 'mongoose'
 
 export type ShoesDocument = Document & {
@@ -15,55 +16,46 @@ export type ShoesDocument = Document & {
   shoeCategory: string
 }
 
-const shoesSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-
-  shoeCategory: {
-    type: String,
-  },
-  category: {
-    type: String,
-    required: true,
-  },
-
-  price: {
-    type: Number,
-    required: true,
-  },
-  discount: {
-    type: Boolean,
-  },
-  countInStock: {
-    type: Number,
-  },
-  imageUrl: {
-    type: String,
-  },
-  user: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+const shoesSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true, 'Please enter product name'],
+      trim: true,
     },
-  ],
-  order: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Order',
+    description: {
+      type: String,
+      required: [true, 'Please enter product description'],
     },
-  ],
-  variant: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Variant',
+    shoeCategory: {
+      type: String,
     },
-  ],
-})
+    category: {
+      type: String,
+      required: [true, 'Please enter product category'],
+    },
+    size: [{ type: Number, required: true }],
+    price: {
+      type: Number,
+      required: [true, 'Please enter product price'],
+      maxLength: [3, 'Price cannot exceed 3 digits'],
+    },
+    discount: {
+      type: Boolean,
+    },
+    countInStock: {
+      type: Number,
+      required: [true, 'Please enter product stock'],
+      default: 1,
+    },
+    imageUrl: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
+  },
+  { timestamps: true }
+)
 
 export default mongoose.model<ShoesDocument>('Shoes', shoesSchema)

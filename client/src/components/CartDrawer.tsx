@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import Drawer from '@mui/material/Drawer'
@@ -8,7 +8,7 @@ import Badge from '@mui/material/Badge'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 import { Store } from '../redux/reducers'
-import { getShoesFromDB, removeFromCart } from '../redux/actions/cartAction'
+import { removeFromCart } from '../redux/actions/cartAction'
 
 const style = {
   color: 'white',
@@ -24,9 +24,9 @@ function CartDrawer() {
     return state.userReducer.user
   })
 
-  useEffect(() => {
-    dispatch(getShoesFromDB(user?._id))
-  }, [user?._id])
+  // useEffect(() => {
+  //   dispatch(getShoesFromDB(user?._id, token))
+  // }, [user?._id])
 
   const cart = useSelector((state: Store) => {
     if (token) {
@@ -75,7 +75,7 @@ function CartDrawer() {
             {cart.map((item) => (
               <li className="cartDrawerItem cartDrawerHeight" key={item._id}>
                 <img
-                  src={item.imageUrl}
+                  src={item.imageUrl[0]}
                   alt={item.title}
                   width="100px"
                   height="100px"

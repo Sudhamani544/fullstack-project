@@ -1,0 +1,128 @@
+[
+    {
+        "rating": 0,
+        "size": [],
+        "countInStock": 5,
+        "imageUrl": [
+            "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e719d6e7-9d95-4c3e-9e78-37300929407f/zoom-freak-3-team-basketball-shoe-9FVl5X.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/99416a78-da17-4820-9a95-c62c79ddd7a6/zoom-freak-3-team-basketball-shoe-9FVl5X.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/f77dfc92-4dea-49da-8797-586d472508d5/zoom-freak-3-team-basketball-shoe-9FVl5X.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/17de1cba-494e-483b-9dc3-a1c421df69fe/zoom-freak-3-team-basketball-shoe-9FVl5X.png"
+        ],
+        "noofReviews": 0,
+        "_id": "61a531420fd6602c7c830df5",
+        "title": "Zoom Freak 3",
+        "description": "There has never been a player like Giannis. His freakishly athletic game combines massive strides, misdirecting Euro steps, and the ability to play any position—and get by anyone on his way to the rim. The Zoom Freak 3 (Team) is built to enable Giannis to get the most from his unique skillset. It gives him a fine-tuned fit, forefoot responsiveness and multidirectional traction to help him stay in control.",
+        "price": 100,
+        "shoeCategory": "Basketball Shoe",
+        "category": "men",
+        "createdAt": "2021-11-29T20:00:02.412Z",
+        "__v": 0,
+        "discount": false
+    },
+    {
+        "rating": 0,
+        "size": [],
+        "countInStock": 5,
+        "imageUrl": [
+            "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/28d60e46-29e3-4fc2-bcd3-d5b466a07308/air-zoom-pegasus-38-mens-road-running-shoes-lq7PZZ.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/f2b63431-904f-429b-8e2e-c88886857e18/air-zoom-pegasus-38-mens-road-running-shoes-lq7PZZ.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/cff147d1-706e-4e7b-b3e9-6ef731016e0b/air-zoom-pegasus-38-mens-road-running-shoes-lq7PZZ.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/7a3606fd-df9f-4cff-9fdf-632ab5bd7b4f/air-zoom-pegasus-38-mens-road-running-shoes-lq7PZZ.png"
+        ],
+        "noofReviews": 0,
+        "_id": "61afd0902a7f8b355891e39c",
+        "title": "Nike Air Zoom Pegasus 38",
+        "description": "The road is your runway. Get ready to take flight in the workhorse with wings. Back with extra bounce that’s perfect for hitting the pavement. Whether you’re racking up everyday miles or on your long run, feel the spring in your step with the same cushioned support as its predecessor. Breathable mesh in the upper combines the comfort and durability you want with a wider fit at the toes.",
+        "price": 120,
+        "shoeCategory": "Running Shoe",
+        "category": "men",
+        "discount": false,
+        "createdAt": "2021-12-07T21:22:24.452Z",
+        "__v": 0
+    },
+    {
+        "rating": 0,
+        "size": [],
+        "countInStock": 5,
+        "imageUrl": [
+            "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/42202ec2-4dad-4e30-9eb6-61c6c406af61/lebron-18-low-sylvester-vs-tweety-basketball-shoes-bC7rKB.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/5b254d84-f9f1-4a6d-a189-4dee5c7220be/lebron-18-low-sylvester-vs-tweety-basketball-shoes-bC7rKB.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/d6923e67-5d32-4cde-88f8-57602d87786e/lebron-18-low-sylvester-vs-tweety-basketball-shoes-bC7rKB.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/313638de-7cc6-43d7-b94a-535a0c141234/lebron-18-low-sylvester-vs-tweety-basketball-shoes-bC7rKB.png"
+        ],
+        "noofReviews": 0,
+        "_id": "61afd1ba2a7f8b355891e39e",
+        "title": "LeBron 18 Low 'Sylvester vs Tweety'",
+        "description": "Sufferin’ succotash! It’s Tunes vs. Goons in the long-awaited basketball blockbuster, Space Jam: A New Legacy. Nike Basketball celebrates the showdown with a fun take on the LeBron 18 Low. The shoe is light yet strong, with responsive cushioning tuned for LeBron’s fast, powerful game—and perfect for taking on a squad of Goons in space. ‘Sylvester vs Tweety’ plays on the predatory puddy tat’s nonstop attempts to snack on the sweet, little canary, who always has the moves to frustrate the feline, whether in the bird cage or on the basketball court.",
+        "price": 160,
+        "shoeCategory": "Basketball Shoe",
+        "category": "women",
+        "discount": false,
+        "createdAt": "2021-12-07T21:27:22.887Z",
+        "__v": 0
+    },
+    {
+        "rating": 0,
+        "size": [],
+        "countInStock": 5,
+        "imageUrl": [
+            "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/0e3d72a4-d7cb-4a48-a104-3d2cf470d912/react-escape-run-womens-road-running-shoes-fgl8l1.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/16792d2e-efd4-4f27-8e08-0f777cfc11e1/react-escape-run-womens-road-running-shoes-fgl8l1.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/0780a5f4-9f43-44ab-a699-7d04f67982a1/react-escape-run-womens-road-running-shoes-fgl8l1.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/12dda029-d76b-4161-bd65-b760bf828c38/react-escape-run-womens-road-running-shoes-fgl8l1.png"
+        ],
+        "noofReviews": 0,
+        "_id": "61b71029bb5568180c7f0ba9",
+        "title": "Nike React Escape Run",
+        "description": "Run the streets in shoes tailored to support women's feet. A cushioned collar with a wider opening gives you a soft, responsive feel. Escape the daily routine and reconnect with yourself through your miles and a design inspired by your cozy winter clothing.",
+        "price": 110,
+        "shoeCategory": "Running Shoe",
+        "category": "women",
+        "discount": false,
+        "createdAt": "2021-12-13T09:19:37.287Z",
+        "__v": 0
+    },
+    {
+        "rating": 0,
+        "size": [],
+        "countInStock": 5,
+        "imageUrl": [
+            "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/8cc8b24d-5d18-4e91-a222-f9d206138b14/star-runner-3-big-kids-road-running-shoes-N3tJlT.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/626d5267-ebff-48ac-a25a-20b68f93c4b9/star-runner-3-big-kids-road-running-shoes-N3tJlT.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/336700a7-59e3-461d-822e-f4e3818c2406/star-runner-3-big-kids-road-running-shoes-N3tJlT.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/2bebfe98-a077-40ae-9b7a-fd384be343f6/star-runner-3-big-kids-road-running-shoes-N3tJlT.png"
+        ],
+        "noofReviews": 0,
+        "_id": "61b71117bb5568180c7f0bac",
+        "title": "Nike Star Runner 3",
+        "description": "This is some serious star power. The Nike Star Runner 3 shoots for the sky with versatile shoes to run, jump and play. They’re boosted with durability and breathability where you need it. Plus, supersoft foam and loads of flexibility rocket up the comfort with every move. Designed with the planet in mind, they're made with at least 20% recycled content by weight.",
+        "price": 50,
+        "shoeCategory": "Running Shoe",
+        "category": "kids",
+        "discount": false,
+        "createdAt": "2021-12-13T09:23:35.952Z",
+        "__v": 0
+    },
+    {
+        "rating": 0,
+        "size": [],
+        "countInStock": 5,
+        "imageUrl": [
+            "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e55bb6b3-ef46-4aad-b4b8-41e84eaa3eb4/freak-3-big-kids-basketball-shoes-SHfs10.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/5d9984bd-8128-4044-b905-32afde2271b3/freak-3-big-kids-basketball-shoes-SHfs10.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/c222765d-5489-4870-8f55-1f0a3483ff15/freak-3-big-kids-basketball-shoes-SHfs10.png",
+            "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/8e6bae8b-cae5-4cd0-a27c-e7f5d27aa404/freak-3-big-kids-basketball-shoes-SHfs10.png"
+        ],
+        "noofReviews": 0,
+        "_id": "61b711afbb5568180c7f0bae",
+        "title": "Freak 3",
+        "description": "From quick cuts to Eurosteps, the Freak 3 captures the ultimate speed and mobility of Giannis Antetokounmpo. The 3rd edition of the MVP’s signature shoe gets better with more flexibility and stability for each step on the court. Plus, with a new traction pattern, outsole design and a super secure strap, your inner Freak will be ready to unleash when it’s time to ball.",
+        "price": 80,
+        "shoeCategory": "Basketball Shoe",
+        "category": "kids",
+        "discount": false,
+        "createdAt": "2021-12-13T09:26:07.085Z",
+        "__v": 0
+    }
+]

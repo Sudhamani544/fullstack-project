@@ -3,35 +3,55 @@ import mongoose, { Document } from 'mongoose'
 import addressSchema from './Address'
 
 export type OrderDocument = Document & {
-  orderNumber: string
-  orderDate: Date
-  shipDate: Date
-  orderSummary: number
-  address: string[]
-  shoes: string[]
+  userId: string
+  products: [{ productId: string; quantity: number }]
+  amount: number
+  address: object
+  status: string
 }
 
-const orderSchema = new mongoose.Schema({
-  orderNumber: {
-    type: String,
-    required: true,
+const orderSchema = new mongoose.Schema(
+  {
+    userId: { type: String, required: true },
+    products: [
+      {
+        productId: {
+          type: String,
+        },
+        quantity: {
+          type: Number,
+          default: 1,
+        },
+      },
+    ],
+    amount: { type: Number, required: true },
+    address: { type: Object, requried: true },
+    status: { type: String, default: 'pending' },
   },
-  orderDate: {
-    type: Date,
-  },
-  shipDate: {
-    type: Date,
-  },
-  orderSummary: {
-    type: Number,
-  },
-  address: [addressSchema],
-  shoes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Shoes',
-    },
-  ],
-})
+  { timestamps: true }
+)
+
+// const orderSchema = new mongoose.Schema({
+//   orderNumber: {
+//     type: String,
+//     required: true,
+//   },
+//   orderDate: {
+//     type: Date,
+//   },
+//   shipDate: {
+//     type: Date,
+//   },
+//   orderSummary: {
+//     type: Number,
+//   },
+//   address: [addressSchema],
+//   shoes: [
+//     {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: 'Shoes',
+//     },
+//   ],
+// })
 
 export default mongoose.model<OrderDocument>('Order', orderSchema)

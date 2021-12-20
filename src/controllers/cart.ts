@@ -1,41 +1,25 @@
 import { Request, Response, NextFunction } from 'express'
 
-import Shoes from '../models/Shoes'
-import ShoesService from '../services/shoes'
+import Cart from '../models/Cart'
+import CartService from '../services/cart'
 import { BadRequestError } from '../helpers/apiError'
 
-// POST /shoes
-export const createShoes = async (
+// POST /
+export const createCart = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const {
-      title,
-      description,
-      shoeCategory,
-      category,
-      size,
-      price,
-      discount,
-      countInStock,
-      imageUrl,
-    } = req.body
-    const shoes = new Shoes({
-      title,
-      description,
-      shoeCategory,
-      category,
-      size,
-      price,
-      discount,
-      countInStock,
-      imageUrl,
+    const { userId, products } = req.body
+    console.log('incart', req.body)
+    const cart = new Cart({
+      userId,
+      products,
     })
 
-    await ShoesService.create(shoes)
-    res.json(shoes)
+    await CartService.create(cart)
+    res.json(cart)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -45,17 +29,16 @@ export const createShoes = async (
   }
 }
 
-// PUT /shoes/:shoeId
-export const updateShoes = async (
+// PUT /:userId
+export const updateCart = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const update = req.body
-    const productId = req.params.shoeId
-    const updatedShoes = await ShoesService.update(productId, update)
-    res.json(updatedShoes)
+    const userId = req.params.userId
+    const updatedCart = await CartService.update(userId, req.body)
+    res.json(updatedCart)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -66,13 +49,13 @@ export const updateShoes = async (
 }
 
 // DELETE /shoes/:shoeId
-export const deleteShoes = async (
+export const deleteCart = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    await ShoesService.deleteShoes(req.params.shoeId)
+    await CartService.deleteCart(req.params.userId)
     res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -83,14 +66,14 @@ export const deleteShoes = async (
   }
 }
 
-// GET /shoes/:shoeId
+// GET /:userId
 export const findById = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    res.json(await ShoesService.findById(req.params.shoeId))
+    res.json(await CartService.findById(req.params.userId))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -100,19 +83,14 @@ export const findById = async (
   }
 }
 
-// GET /shoes
+// GET /
 export const findAll = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const query = req.query.category as string
-    if (query === undefined) {
-      res.json(await ShoesService.findAll())
-    } else {
-      res.json(await ShoesService.findByCategory(query))
-    }
+    res.json(await CartService.findAll())
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

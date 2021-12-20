@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import GoogleLogin, { GoogleLogout } from 'react-google-login'
 import { useDispatch, useSelector } from 'react-redux'
+import { fetchShoesFromDB, getShoesFromDB } from '../redux/actions/cartAction'
 import { getJWTToken, getUserData } from '../redux/actions/userAction'
 import { Store } from '../redux/reducers'
 import { User } from '../redux/types'
@@ -29,8 +30,10 @@ const LoginPage = () => {
     const userData = result.data.userData
     const token = result.data.token
     localStorage.setItem('token', token)
+    console.log('userdata', userData)
     dispatch(getUserData(userData))
     dispatch(getJWTToken(token))
+    dispatch(getShoesFromDB(userData._id, token))
   }
 
   const user = useSelector((state: Store) => {
@@ -40,7 +43,10 @@ const LoginPage = () => {
   const onSignoutSuccess = () => {
     localStorage.removeItem('token')
     const token = ''
+    const shoes = null
     dispatch(getJWTToken(token))
+    dispatch(fetchShoesFromDB(shoes, token))
+    console.log('logout and empty cart')
     setLogin(true)
     setLogout(false)
   }

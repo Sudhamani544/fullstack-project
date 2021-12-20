@@ -31,16 +31,19 @@ export const jwtStrategy = new JwtStrategy(
     //token = req.headers.authorization.split(" ")[1]
   },
   //here payload is the token payload(userData in login.ts)
-  async (payload: UserDocument, done: any) => {
+  async (payload: any, done: any) => {
     console.log('payload', payload)
 
-    const { emailId } = payload
+    const { emailId } = payload.userData
+    console.log('emailid', emailId)
     const user = await User.findOne({ emailId: emailId })
 
     if (!user) {
-      throw new NotFoundError(`user not found`)
+      throw new NotFoundError('user not found')
     }
 
     done(null, user)
   }
 )
+
+//to use jwt passport strategy, for auth use "passport.authenticate('jwt', { session: false })"

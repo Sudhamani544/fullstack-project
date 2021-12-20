@@ -22,7 +22,7 @@ const CartItem = (item: Cart) => {
     <div className="cartItem">
       <div>
         <img
-          src={item.imageUrl}
+          src={item.imageUrl[0]}
           alt={item.title}
           width="130px"
           height="110px"

@@ -7,7 +7,12 @@ import '../pages/pages.css'
 import { getOneProduct, getSizes } from '../redux/actions/productAction'
 import { Store } from '../redux/reducers'
 import { Product, User } from '../redux/types'
-import { insertToCart, insertToDBCart } from '../redux/actions/cartAction'
+import {
+  fetchShoesFromDB,
+  getShoesFromDB,
+  insertToCart,
+  insertToDBCart,
+} from '../redux/actions/cartAction'
 import Popover from '@mui/material/Popover'
 import Typography from '@mui/material/Typography'
 
@@ -54,7 +59,12 @@ const ShoesPage = () => {
   const handleAddToCart = (e: any) => {
     token
       ? dispatch(
-          insertToDBCart(product as Product, user as User, token as string)
+          insertToDBCart(
+            product as Product,
+            user as User,
+            token as string,
+            qty as number
+          )
         )
       : dispatch(insertToCart(product as Product, vSize, qty))
     setAnchorEl(e.currentTarget)
@@ -70,7 +80,7 @@ const ShoesPage = () => {
     <div className="productScreen">
       <div className="productScreen__image">
         <img
-          src={product?.imageUrl}
+          src={product?.imageUrl[0]}
           width="100%"
           height="50%"
           alt="shoe image"

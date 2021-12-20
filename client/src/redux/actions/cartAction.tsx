@@ -5,12 +5,18 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:5000/api/v1'
 
-export const insertToDBCart = (product: Product, user: User, token: string) => {
+export const insertToDBCart = (
+  product: Product,
+  user: User,
+  token: string,
+  qty: number
+) => {
   return async (dispatch: Dispatch, getState: any) => {
     try {
-      await axios.put(
-        `/user/${user._id}`,
-        { shoes: product._id },
+      dispatch(fetchShoesFromDB(product, token))
+      await axios.post(
+        `/cart`,
+        { user: user._id, quantity: qty, products: [product._id] },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -18,16 +24,27 @@ export const insertToDBCart = (product: Product, user: User, token: string) => {
           },
         }
       )
-      await axios.put(
-        `/shoes/${product._id}`,
-        { user: user._id },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      // dispatch(fetchShoesFromDB(product, token))
+      // await axios.put(
+      //   `/user/${user._id}`,
+      //   { shoes: product._id },
+      //   {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // )
+      // await axios.put(
+      //   `/shoes/${product._id}`,
+      //   { user: user._id },
+      //   {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // )
     } catch (error) {
       console.log('frontend')
       dispatch(fetchError(error))
@@ -35,31 +52,38 @@ export const insertToDBCart = (product: Product, user: User, token: string) => {
   }
 }
 
-export const getShoesFromDB = (userId: string | undefined) => {
+export const getShoesFromDB = (
+  userId: string | undefined,
+  token: string | null
+) => {
   return async (dispatch: Dispatch, getState: any) => {
     try {
-      const user = await axios(`/user/${userId}`)
-      const userProducts = user.data as User
-      console.log('shoes from user', userProducts.shoes)
-      for (let i in userProducts.shoes) {
-        try {
-          const product = await axios(`/shoes/${i}`)
-          const productData = product.data as Product
-          dispatch(fetchShoesFromDB(productData))
-        } catch (error) {
-          dispatch(fetchError(error))
-        }
-      }
+      const user = await axios(`/cart`)
+      console.log('getshoesfromcart', user)
+      // const user = await axios(`/user/${userId}`)
+      // const userProducts = user.data as User
+      // userProducts.shoes.map(async (id) => {
+      //   try {
+      //     const product = await axios(`/shoes/${id}`)
+      //     const productData = product.data as Product
+      //     dispatch(fetchShoesFromDB(productData, token))
+      //   } catch (error) {
+      //     dispatch(fetchError(error))
+      //   }
+      // })
     } catch (error) {
       dispatch(fetchError(error))
     }
   }
 }
 
-export const fetchShoesFromDB = (shoes: Product) => {
+export const fetchShoesFromDB = (
+  shoes: Product | null,
+  token: string | null
+) => {
   return {
     type: actionTypes.FETCH_SHOES_FROM_DB,
-    payload: shoes,
+    payload: { shoes, token },
   }
 }
 
@@ -105,7 +129,7 @@ type InsertToCart = {
 
 type FetchShoesFromDB = {
   type: typeof actionTypes.FETCH_SHOES_FROM_DB
-  payload: Product
+  payload: { shoes: Product | null; token: string | null }
 }
 
 type RemoveFromCart = {

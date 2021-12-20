@@ -44,7 +44,7 @@ const FavoriteDialog = () => {
               <div className="favoriteIcon_display" key={item._id}>
                 <div>
                   <img
-                    src={item.imageUrl}
+                    src={item.imageUrl[0]}
                     alt={item.title}
                     width="130px"
                     height="110px"

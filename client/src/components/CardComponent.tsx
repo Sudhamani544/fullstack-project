@@ -48,6 +48,8 @@ const CardComponent = ({
     }
   }
 
+  console.log('image', imageUrl)
+
   return (
     <div className="card">
       <Card className="card__link">
@@ -58,6 +60,7 @@ const CardComponent = ({
             width="300"
             image={imageUrl}
             alt={title}
+            className=""
           />
           <CardContent>
             <Typography component="div" align="center">

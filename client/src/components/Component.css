@@ -58,11 +58,11 @@
   list-style: none;
   cursor: pointer;
   align-items: center;
-  /* align-items: center; */
 }
 
 .navbar__links > li {
-  padding-left: 1.5rem;
+  padding: 0.5rem;
+  padding-left: 1rem;
 }
 
 .navbar__links > li > a {

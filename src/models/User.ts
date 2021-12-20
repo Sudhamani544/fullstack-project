@@ -5,34 +5,28 @@ export type UserDocument = Document & {
   firstName: string
   lastName: number
   emailId: string
-  shoes: string[]
-  order: string[]
+  isAdmin: boolean
 }
 
-const userSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  emailId: {
-    type: String,
-  },
-  shoes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Shoes',
+const userSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
     },
-  ],
-  order: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Order',
+    lastName: {
+      type: String,
+      required: true,
     },
-  ],
-})
+    emailId: {
+      type: String,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+)
 
 export default mongoose.model<UserDocument>('User', userSchema)

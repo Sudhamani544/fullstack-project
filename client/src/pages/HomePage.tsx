@@ -52,7 +52,7 @@ const HomePage = () => {
               id={product._id}
               title={product.title}
               price={product.price}
-              imageUrl={product.imageUrl}
+              imageUrl={product.imageUrl[0]}
               category={product.category}
               shoeCategory={product.shoeCategory}
             />

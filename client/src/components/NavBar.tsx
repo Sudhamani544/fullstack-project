@@ -5,8 +5,11 @@ import './Component.css'
 import HamburgerMenu from './HamburgerMenu'
 import { Store } from '../redux/reducers'
 import CartDrawer from './CartDrawer'
+import FavoriteBorder from '@mui/icons-material/Favorite'
 import FavoriteDialog from './FavoriteDialog'
 import LoginLogout from './LoginLogout'
+import { Badge } from '@mui/material'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 const style = {
   color: 'white',
@@ -42,7 +45,16 @@ const NavBar = () => {
           <FavoriteDialog />
         </li>
         <li>
-          <CartDrawer />
+          <Link to={`/cart`}>
+            <Badge
+              // onClick={toggleDrawer(true)}
+              badgeContent={cart.length}
+              color="primary"
+              showZero
+            >
+              <ShoppingCartIcon sx={style} />
+            </Badge>
+          </Link>
         </li>
         <li>
           <LoginLogout />
