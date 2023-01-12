@@ -1,0 +1,10 @@
+{
+  "title": "Zoom Freak 3",
+  "shoeCategory": "basket ball",
+  "description": "The Zoom Freak 3 helps Giannis create space with his massive strides and misdirecting Euro-step.",
+  "price": 100,
+  "discount": false,
+  "countInStock": 10,
+  "imageUrl": "https://res.cloudinary.com/cloud-image123/image/upload/v1635369820/samples/ecommerce/Zoom_freak_3_-_basketball_-_men_i0jrqq.png",
+  "category": "men"
+}

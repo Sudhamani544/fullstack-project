@@ -1,0 +1,3 @@
+export const INSERT_TO_FAV = 'INSERT_TO_FAV'
+export const REMOVE_FROM_FAV = 'REMOVE_FROM_FAV'
+export const FETCH_ERROR = 'FETCH_ERROR'
